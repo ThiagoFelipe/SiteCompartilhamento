@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>
+            <ui:insert name="title">
+                Site de Compartilhamento
+            </ui:insert>
+        </title>
+        <h:outputStylesheet name="css/bootstrap.min.css" />
+        <h:outputStylesheet name="css/sitecompartilhamento.css" />
+        <h:outputScript name="js/jquery.min.js" />
+        <h:outputScript name="js/bootstrap.min.js" />
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <h:form id="linksFrm">
+                        <ul class="nav navbar-nav">
+                            <li><h:commandLink action="/index.xhtml?faces-redirect=true">Início</h:commandLink></li>
+                            <li><h:commandLink action="/paginas/perfil.xhtml">Meu Perfil</h:commandLink></li>
+                            <li><h:commandLink action="/paginas/alta.xhtml">Em Alta</h:commandLink></li>
+                            <li><h:commandLink action="/paginas/novidades.xhtml">Novidades</h:commandLink></li>
+                            <li><h:commandLink action="/paginas/sobre.xhtml">Sobre</h:commandLink></li>
+                            <li><h:commandLink action="/paginas/login.xhtml">Login</h:commandLink></li>
+                        </ul>
+                    </h:form>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <h:form id="formulario">
+                <ui:insert name="content" />
+            </h:form>
+        </div><!-- /.container -->
+    </h:body>
+</html>
