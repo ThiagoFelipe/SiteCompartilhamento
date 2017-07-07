@@ -14,19 +14,28 @@ import javax.persistence.Persistence;
  * @author thiag
  */
 public class MyConection {
-    
-    private static final String PERSISTENCEUNIT = "sitecompartilhamentoUP";
-    private EntityManagerFactory factory;
-    private EntityManager entidyManager;
 
-    public EntityManager getEntidyManager() {
-        return entidyManager;
+    private static final String PERSISTENCE_UNIT = "sitecompartilhamentoUP";
+    private static MyConection instance;
+    private static EntityManagerFactory factory;
+    private EntityManager entityManager;
+
+    private MyConection() {
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
     }
 
-    public MyConection() {
-        factory = Persistence.createEntityManagerFactory(PERSISTENCEUNIT);
-        entidyManager = factory.createEntityManager();
+    public static synchronized MyConection newInstance() {
+        if (instance == null) {
+            instance = new MyConection();
+        }
+        return instance;
     }
-    
-    
+
+    public EntityManager getEntityManager() {
+        if (entityManager == null || !entityManager.isOpen()) {
+            entityManager = factory.createEntityManager();
+        }
+        return entityManager;
+    }
+
 }

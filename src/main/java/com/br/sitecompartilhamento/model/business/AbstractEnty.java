@@ -6,41 +6,33 @@
 package com.br.sitecompartilhamento.model.business;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author thiag
  */
-@Entity
-@Table(name = "users")
-public class User implements Serializable {
+@MappedSuperclass
+public abstract class AbstractEnty implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String username;
-    private String password;
 
-    public String getUsername() {
-        return username;
-    }
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public AbstractEnty() {
+        this.created = new Date();
     }
 
     public Long getId() {
@@ -49,6 +41,14 @@ public class User implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     @Override
@@ -61,10 +61,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof AbstractEnty)) {
             return false;
         }
-        User other = (User) object;
+        AbstractEnty other = (AbstractEnty) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -73,7 +73,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.br.sitecompartilhamento.model.business.User[ id=" + id + " ]";
+        return "AbstractEntity{" + "id=" + id + ", created=" + created + '}';
     }
-    
+
 }
